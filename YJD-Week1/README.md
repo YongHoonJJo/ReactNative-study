@@ -32,7 +32,7 @@ $ expo init <project-name>
 
 <br>
 
-#### 02. Fortune Lotto
+### 02. Fortune Lotto
 
 <img src='https://user-images.githubusercontent.com/13485924/69348121-00324900-0cb9-11ea-8ca7-2068c270b0c2.PNG' width=250px />
 
@@ -47,4 +47,17 @@ $ expo init <project-name>
   numbers.length = 6
   numbers = _.sortBy(numbers)
   ```
+
+<br>
+
+### 03. Lotto
+
+<img src='https://user-images.githubusercontent.com/13485924/69349848-d9294680-0cbb-11ea-84f6-8725fa16f3d2.PNG' width=250px />
+
+#### Concept
+
+-	Component, props
+-	Conditional Styling
+
+<br>
 
