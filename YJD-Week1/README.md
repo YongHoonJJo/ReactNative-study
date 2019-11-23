@@ -63,7 +63,7 @@ $ expo init <project-name>
 
 ### 04. PassBank
 
-<img src='https://user-images.githubusercontent.com/13485924/69480614-5c79a200-0e4c-11ea-9cea-5e8c22d68c36.PNG' width=350px />
+<img src='https://user-images.githubusercontent.com/13485924/69480614-5c79a200-0e4c-11ea-9cea-5e8c22d68c36.PNG' width=250px />
 
 #### ReactNative API
 
@@ -74,3 +74,24 @@ $ expo init <project-name>
 #### Hooks
 
 - useState()
+
+<br>
+
+### 05. Magic Conch
+
+<img src='https://user-images.githubusercontent.com/13485924/69481548-a915ab00-0e55-11ea-9343-82a5a81869a5.PNG' width=250px />
+
+#### ReactNative API
+
+- TouchableOpacity
+  - <https://facebook.github.io/react-native/docs/touchableopacity>
+  - `<Image />` 를 버튼으로 만들 때 사용.
+  - onPress 이벤트
+
+ 
+
+<br>
+
+#### Reference
+
+<https://github.com/GrotesQ/Codelab-React-Native-4th>
