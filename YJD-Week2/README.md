@@ -45,3 +45,41 @@ export default const Spacer = (props) => {
 
 <br>
 
+### 07. Clock
+
+<img src='https://user-images.githubusercontent.com/13485924/69602238-375a7e80-105a-11ea-8154-640f27f75c07.PNG' width=250px>
+
+#### useEffect()
+
+```jsx
+const Component = () => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    console.log("render에 의해 무조건 반응");
+  });
+
+  useEffect(() => {
+    console.log("mounted와 같은 효과로 Component가 처음 시작될때 한번 동작");
+
+    return () => {
+      console.log(
+        "unmounted와 같은 효과로 Component가 사용되지 않을 때 한번 동작"
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log("watch 기능으로 count의 데이터가 변화할 때만 동작");
+  }, [count]);
+
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(prev => prev + 1)}>증가</button>
+    </div>
+  );
+};
+```
+
+
+
