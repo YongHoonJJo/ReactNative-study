@@ -178,7 +178,40 @@ const styles = StyleSheet.create({
 
 <br>
 
+### 09. Tabs
 
+```
+$ expo init tabs
+```
+
+<img width="992" alt="expo_tabs" src="https://user-images.githubusercontent.com/13485924/69811969-9ecb2680-1232-11ea-962d-cab879b2f5dd.png">
+
+tabs 를 선택해서 진행
+
+<br>
+
+```
+$ cd tabs
+$ npm start
+```
+
+<table>
+  <tr>
+  	<td>
+    	<img src='https://user-images.githubusercontent.com/13485924/69812443-7abc1500-1233-11ea-88c3-daf62e90bcb1.PNG' width=250px>
+    </td>
+    <td>
+    	<img src='https://user-images.githubusercontent.com/13485924/69812445-7b54ab80-1233-11ea-8e43-3429b235dd98.PNG' width=250px>
+    </td>
+    <td>
+      <img src='https://user-images.githubusercontent.com/13485924/69812446-7b54ab80-1233-11ea-93bc-067b447bbd76.PNG' width=250px>
+    </td>
+  </tr>
+</table>
+
+기본적으로 tab bar 가 제공된다.
+
+<br>
 
 
 
