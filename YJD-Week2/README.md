@@ -213,5 +213,122 @@ $ npm start
 
 <br>
 
+### 10. Simple Navigation - createSwitchNavigator
 
+Navigation 을 이용한 Hand Test App.
 
+```
+$ expo init simple-navi
+$ cd simple-navi
+$ expo install react-navigation react-native-gesture-handler react-native-reanimated react-native-screens
+```
+
+#### App.js
+
+```js
+import React from 'react';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+
+import Home from './pages/Home'
+import Detail from './pages/Detail'
+
+// 여러개의 네비게이터를 생성할 수 있고, 서로 겹치는 상태로 생성할 수도 있음.
+const Navigator = createSwitchNavigator({
+  Home: Home,
+  Detail: Detail
+})
+
+// 네비게이터들을 하나로 묶어서 표시하는 컨테이너. 하나만 있어도 감싸야 한다.
+const Container = createAppContainer(Navigator)
+
+export default function App() {
+  return (
+    <Container />
+  );
+}
+```
+
+#### pages/Home.js
+
+```js
+import React from 'react'
+import { Button, View } from 'react-native'
+
+const Home = (props) => {
+  return (
+    <View>
+      <Button 
+        title={'디테일 페이지로'} 
+        onPress={() => props.navigation.navigate('Detail')} 
+      />
+    </View>
+  )
+}
+
+export default Home
+```
+
+`props.navigation.navigate('Detail')` 에서 `Detail` 은 `App.js` 의 `createSwitchNavigator()` 의 첫번째 매개변수로 전달된 객체의 프로퍼티이다.
+
+#### pages/Detail.js
+
+```js
+import React from 'react'
+import { Button, View } from 'react-native'
+
+const Detail = (props) => {
+  return (
+    <View>
+      <Button 
+        title={'돌아가기'} 
+        onPress={() => props.navigation.navigate('Home')}  
+      />
+    </View>
+  )
+}
+
+export default Detail
+```
+
+#### Screen
+
+<table>
+  <tr>
+  	<td><img src='https://user-images.githubusercontent.com/13485924/69840656-a07f0380-129f-11ea-953d-f8475dc7a612.PNG' width=250px></td>
+    <td><img src='https://user-images.githubusercontent.com/13485924/69840658-a1179a00-129f-11ea-8dce-e69b973dc9ee.PNG' width=250px></td>
+  </tr>
+</table>
+
+기본적인 코드의 구조는 위와 같다. 하지만, 위의 **Screen**에서 보이는 것처럼, 버튼이 상단바를 침범하게 된다.
+
+이는 `pages/Home.js` 와 `pages/Detail.js` 에서 `View` 컴포넌트 대신, `SafeAreaView` 컴포넌트를 사용해서 해결할 수 있다.
+
+<br>
+
+#### pages/Home.js
+
+```js
+import React from 'react'
+import { Button, SafeAreaView } from 'react-native'
+
+const Home = (props) => {
+  return (
+    <SafeAreaView>
+      <Button 
+        title={'디테일 페이지로'} 
+        onPress={() => props.navigation.navigate('Detail')} 
+      />
+    </SafeAreaView>
+  )
+}
+
+export default Home
+```
+
+<img src='https://user-images.githubusercontent.com/13485924/69841309-01a7d680-12a2-11ea-8fe2-13f623ccdc0c.PNG' width=250px>
+
+#### Docs
+
+- React Navigation : <https://reactnavigation.org/docs/en/getting-started.html>
+- createSwitchNavigator : <https://reactnavigation.org/docs/en/switch-navigator.html>
+- SafeAreaView : <https://facebook.github.io/react-native/docs/safeareaview>
