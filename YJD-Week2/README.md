@@ -332,3 +332,95 @@ export default Home
 - React Navigation : <https://reactnavigation.org/docs/en/getting-started.html>
 - createSwitchNavigator : <https://reactnavigation.org/docs/en/switch-navigator.html>
 - SafeAreaView : <https://facebook.github.io/react-native/docs/safeareaview>
+
+<br>
+
+### 11. Simple Navigation - createStackNavigator
+
+```
+$ expo init simple-stack-navi
+$ cd simple-stack-navi
+$ expo install react-navigation react-native-gesture-handler react-native-reanimated react-native-screens
+$ npm i react-navigation-stack
+```
+
+#### App.js
+
+```js
+import React from 'react';
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
+
+import Home from './pages/Home'
+import Detail from './pages/Detail'
+
+const Navigator = createStackNavigator({
+  Home: Home, // Main Screen
+  Detail: Detail
+})
+
+// 네비게이터들을 하나로 묶어서 표시하는 컨테이너. 하나만 있어도 감싸야 한다.
+const Container = createAppContainer(Navigator)
+
+export default function App() {
+  return (
+    <Container />
+  );
+}
+```
+
+`createSwitchNavigator()` 대신 `createStackNavigator()` 를 이용하여 `Navigator` 를 생성하였다.
+
+현재 `pages/Home.js` 와 `pages/Detail.js` 의 내용은 이전과 동일하며, 화면은 아래와 같다.
+
+<Table>
+  <tr>
+    <td><img src='https://user-images.githubusercontent.com/13485924/69842727-b395d180-12a7-11ea-9bab-24cdff23f9a4.PNG' width=250px></td>
+    <td><img src='https://user-images.githubusercontent.com/13485924/69842725-b2fd3b00-12a7-11ea-9c20-1e48d149a73d.PNG' width=250px></td>
+  </tr>
+</table>
+
+상단바와 Back 버튼이 생겼다.
+
+<br>
+
+#### pages/Detail.js
+
+```js
+import React from 'react'
+import { Button, SafeAreaView, View } from 'react-native'
+
+const Detail = (props) => {
+  return (
+    <SafeAreaView>
+      <Button 
+        title={'돌아가기'} 
+        // onPress={() => props.navigation.navigate('Home')}  
+        onPress={() => props.navigation.goBack()}
+      />
+    </SafeAreaView>
+  )
+}
+
+Detail.navigationOptions = {
+  title: '디테일'
+}
+
+export default Detail
+```
+
+버튼 클릭시, 특정 navigator 로 이동하는 대신, `props.navigation.goBack()` 을 통해 이전 페이지로 이동할 수 있게 설정할 수 있다.
+
+또한, `Detail.navigationOptions = { title: '디테일' } ` 을 통해 상단바의 타이틀을 설정할 수 있다.
+
+<Table>
+  <tr>
+  	<td><img src='https://user-images.githubusercontent.com/13485924/69843001-ebe9df80-12a8-11ea-8cdb-e53664e4ba7e.PNG' width=250px></td>
+  	<td><img src='https://user-images.githubusercontent.com/13485924/69843002-ebe9df80-12a8-11ea-85be-ed66c1b8cbf1.PNG' width=250px></td>
+  </tr>
+</table>
+
+#### Docs
+
+- createStackNavigator : <https://reactnavigation.org/docs/en/stack-navigator.html>
+
