@@ -424,3 +424,147 @@ export default Detail
 
 - createStackNavigator : <https://reactnavigation.org/docs/en/stack-navigator.html>
 
+<br>
+
+### 12. Hand Test Navigator
+
+```
+$ expo init hand-test-navi
+$ cd init hand-test-navi
+$ expo install react-navigation react-native-gesture-handler react-native-reanimated react-native-screens
+$ npm i react-navigation-stack
+```
+
+#### App.js
+
+```js
+import React from 'react';
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
+
+import Home from './pages/Home'
+import TypeA from './pages/TypeA'
+import TypeB from './pages/TypeB'
+import TypeC from './pages/TypeC'
+import TypeD from './pages/TypeD'
+
+const Navigator = createStackNavigator({
+  Home: Home, // Main Screen
+  TypeA: TypeA,
+  TypeB: TypeB,
+  TypeC: TypeC,
+  TypeD: TypeD,
+})
+
+// 네비게이터들을 하나로 묶어서 표시하는 컨테이너. 하나만 있어도 감싸야 한다.
+const Container = createAppContainer(Navigator)
+
+export default function App() {
+  return (
+    <Container />
+  );
+}
+```
+
+`createStackNavigator()` 에서 첫번째 인자로 페이지를 구성하는 객체를 전달하는데, 첫번째 프로퍼티가 Main Screen 이 된다.
+
+#### pages/Home.js
+
+```js
+import React from 'react'
+import { Button, SafeAreaView, View, TouchableOpacity, Image } from 'react-native'
+
+import HGroup from '../Components/HGroup'
+import Center from '../Components/Center'
+import HandTypeB from '../assets/hand-type-b.png'
+import HandTypeA from '../assets/hand-type-a.png'
+import HandTypeC from '../assets/hand-type-c.png'
+import HandTypeD from '../assets/hand-type-d.png'
+
+const imageStyle = { width: 136, height: 175 }
+
+const Home = (props) => {
+  return (
+    <View>
+      <Center>
+        <HGroup>
+          <TouchableOpacity onPress={() => props.navigation.navigate('TypeA')}>
+            <Image source={ HandTypeA } style={imageStyle} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => props.navigation.navigate('TypeB')}>
+            <Image source={ HandTypeB } style={imageStyle} />
+          </TouchableOpacity>
+        </HGroup>
+      </Center>
+      <Center>
+        <HGroup>
+          <TouchableOpacity onPress={() => props.navigation.navigate('TypeC')}>
+            <Image source={ HandTypeC } style={imageStyle} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => props.navigation.navigate('TypeD')}>
+            <Image source={ HandTypeD } style={imageStyle} />
+          </TouchableOpacity>
+        </HGroup>
+      </Center>
+    </View>
+  )
+}
+
+Home.navigationOptions = {
+  title: '심리 테스트'
+}
+
+export default Home
+```
+
+#### pages/TypeA.js
+
+```js
+import React from 'react'
+import { Button, Image, Text, View, ScrollView } from 'react-native'
+
+import HandTypeA from '../assets/hand-type-a.png'
+
+const TypeA = (props) => {
+  return (
+    <View>
+      <ScrollView>
+        <Image source={ HandTypeA } style={{width: 272, height: 350}} />
+        <Text>A. 손등이 위로 오고 손가락 사이를 벌린사람</Text>
+        <Text>
+          당신은 감정이 얼굴에 잘 드러나서 조금만 기쁜일이 생겨도 잘 웃는 성격을 가지고 있습니다.
+          또한 자신의 감정을 확실히 하는 성격으로 복잡하거나 피곤한 것을 싫어합니다.
+          자신이 좋아하지 않는 사람에게는 단 1%의 기회도 주지않으며 자신이 좋아하는 사람에게는 매우 관대한 편 입니다.
+          남에게 받은 호의는 반드시 되돌려주고싶어하는 멋진 성격을 가지고 있습니다.
+          단, 고집이 세서 틀린 길임을 알면서도 직진하는 경향이 있으니 가끔은 고집을 꺾을줄도 알아야 합니다.
+        </Text>
+        <Button title={'돌아가기'} onPress={() => props.navigation.goBack()} /> 
+      </ScrollView>
+    </View>
+  )
+}
+
+TypeA.navigationOptions = {
+  title: 'Type A'
+}
+
+export default TypeA
+```
+
+`<ScrollView>` 컴포넌트로 감싸지 않으면, 화면 아래로 넘어가는 내용을 확인할 수 없다.
+
+ `<ScrollView>` 로 감싸면 화면에 스크롤을 적용시킬 수 있다.
+
+<table>
+  <tr>
+  	<td><img src='https://user-images.githubusercontent.com/13485924/69843606-aaa6ff00-12ab-11ea-9b6a-cdc91ac13263.PNG' width=250px></td>
+  	<td><img src='https://user-images.githubusercontent.com/13485924/69843607-aaa6ff00-12ab-11ea-848a-85717f8a2757.PNG' width=250px></td>
+  	<td><img src='https://user-images.githubusercontent.com/13485924/69843690-14bfa400-12ac-11ea-8581-9de937582c32.PNG' width=250px></td>
+  </tr>
+</table>
+
+
+
+#### Docs
+
+- ScrollView : <https://facebook.github.io/react-native/docs/scrollview>
