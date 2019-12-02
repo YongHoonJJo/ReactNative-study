@@ -143,9 +143,67 @@ Custom-Input 에서 `multiline` 을 추가한 상태이다.
 
 <br>
 
+### 14. Async Storage
 
+<img src='https://user-images.githubusercontent.com/13485924/69923410-ffcf5480-14e7-11ea-9942-9eea5775c717.PNG' width=250px>
 
+```jsx
+import React from 'react';
+import { AsyncStorage, Button, StyleSheet, Text, View } from 'react-native';
 
+export default function App() {
+  const [count, setCount] = React.useState(0)
+
+  React.useEffect(() => {
+    // 비동기, Promise
+    AsyncStorage.getItem('count').then( value => {
+      value && setCount(parseInt(value, 10))
+    })
+  }, [])
+
+  const addCount = () => {
+    const newCount = count + 1
+    setCount( newCount )
+    AsyncStorage.setItem('count', newCount.toString()) // You can save String only.
+  }
+
+  const reset = () => {
+    setCount(0)
+    AsyncStorage.removeItem('count')
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text>{ count }</Text>
+      <Button title="Click" onPress={ addCount } />
+      <Button title="Reset" onPress={ reset } />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+```
+
+<br>
+
+#### AsyncStorage
+
+- AsyncStorage.setItem(key, value) 의 형태로 값을 저장할 수 있으며, key 와 value 는 String만 가능하다.
+- AsyncStorage.getItem(key) 의 형태로 저장된 값을 가져올 수 있으며, Promise 객체를 리턴한다. 해당 데이터가 없을경우, null 값을 리턴한다. 이를 통해 앱을 껏다 켜도 데이터를 유지시킬 수 있다.
+- AsyncStorage.removeItem(key) 의 형태로 저장된 값을 제거할 수 있다.
+- Docs: <https://facebook.github.io/react-native/docs/asyncstorage>
+  - 하지만 이 AsyncStorage 는 Deprecated 되었다. 
+  - expo 를 통해 프로젝트를 설치시  `import { AsyncStorage } from 'react-native';` 와 같이 import 할 수 있다.
+  - expo 를 통해 설치 하지 않는 경우, <https://github.com/react-native-community/async-storage> 를 참고하여 설치하면 된다.
+
+<br>
 
 
 
