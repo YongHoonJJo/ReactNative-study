@@ -10,6 +10,42 @@ AsyncStorage 를 사용하면, 데이터를 앱 내에 저장할 수 있다.
 
 <br>
 
+**앱 구조**
+```js
+<TodoListContextProvider> // ContextAPI
+  <View> // App
+    <View> // Todo
+      <SafeAreaView> // TodoListView
+        <View> // Header
+          <Text></Text>
+        </View>
+        <FlatList> // TodoList
+          <View> // TodoItem
+            <Text></Text>
+            <TouchableOpacity>
+              <Image />
+            </TouchableOpacity>
+          </View>
+        </FlatList>
+      </SafeAreaView>
+      <SafeAreaView> // AddButton
+        <TouchableOpacity>
+          <Image />
+        </TouchableOpacity>
+      </SafeAreaView>
+      <KeyboardAvoidingView> // TodoInput
+        <TouchableWithoutFeedback> // Background
+          <View></View>
+        </TouchableWithoutFeedback>
+        <TextInput /> // TextInput
+      </KeyboardAvoidingView>
+    </View>
+  </View>
+</TodoListContextProvider>
+```
+
+<br>
+
 ### Context API
 
 리액트에서 Props 와 State 는 부모 컴포넌트와 자식 컴포넌트 또는 한 컴포넌트 안에서 데이터를 다루기 위해 사용된다. 데이터는 위에서 아래, 한쪽 방향으로 흐르게 된다.
